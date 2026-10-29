@@ -1,0 +1,21 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: gimnasio-deporte
+nombre: Gimnasio y deporte
+descripcion: Web enérgica en tema oscuro para gimnasios y centros deportivos, con clases, horario y tarifas.
+sectores: [gimnasio, deporte, yoga, crossfit, club-deportivo, pilates]
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: clases, nombre: Clases }
+  - { id: horario-clases, nombre: Horario de clases }
+  - { id: tarifas, nombre: Tarifas }
+  - { id: entrenadores, nombre: Entrenadores }
+  - { id: instalaciones, nombre: Instalaciones }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: contacto, nombre: Contacto }
+estilo: energico
+plan_minimo: presencia
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-gimnasio-deporte.noexpertise.com
+activa: true
+orden: 130

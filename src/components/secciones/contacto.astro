@@ -1,0 +1,52 @@
+---
+// Contacto: titular, teléfono en grande, WhatsApp, email, dirección (enlace al mapa) y horario de site.yaml → contacto;
+// a la derecha, formulario (nombre, teléfono, email, «Me interesa», mensaje). `boton_formulario` opcional.
+import { seccion, site, tel, whatsapp, mapa } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const botonForm = (s?.boton_formulario as string) || undefined;
+---
+
+{
+  s && (
+    <Seccion id={id} class="banda-superficie">
+      <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <div>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          {c.telefono && (
+            <a class="contacto-telefono" href={tel(c.telefono)}>{c.telefono}</a>
+          )}
+          <ul class="mt-8 grid gap-4">
+            {c.whatsapp && (
+              <li><a class="contacto-dato" href={whatsapp(c.whatsapp)} rel="noopener" target="_blank"><Icono nombre="whatsapp" class="acento shrink-0" />WhatsApp</a></li>
+            )}
+            {c.email && (
+              <li><a class="contacto-dato break-all" href={`mailto:${c.email}`}><Icono nombre="correo" class="acento shrink-0" />{c.email}</a></li>
+            )}
+            {c.direccion && (
+              <li><a class="contacto-dato" href={mapa(c.direccion)} rel="noopener" target="_blank"><Icono nombre="mapa" class="acento shrink-0" />{c.direccion}</a></li>
+            )}
+            {c.horario && <li class="contacto-dato"><Icono nombre="reloj" class="acento shrink-0" />{c.horario}</li>}
+          </ul>
+        </div>
+        <div class="contacto-form">
+          <FormularioContacto prefijo={`${id}-f`} boton={botonForm} />
+        </div>
+      </div>
+    </Seccion>
+  )
+}
+
+<style>
+  .contacto-telefono { display: inline-block; font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; font-size: clamp(2.6rem, 11vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; text-decoration: none; color: var(--c-acento); }
+  .contacto-dato { display: flex; align-items: flex-start; gap: .8rem; text-decoration: none; font-size: 1.05rem; }
+  a.contacto-dato:hover { color: var(--c-acento); }
+  .contacto-form { background: var(--c-fondo); padding: 1.5rem 1.25rem; border-top: 4px solid var(--c-acento); }
+  @media (min-width: 768px) { .contacto-form { padding: 2.25rem; } }
+</style>

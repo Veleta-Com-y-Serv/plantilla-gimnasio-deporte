@@ -1,0 +1,50 @@
+---
+// Instalaciones: `galeria: [ruta, ruta…]` en mosaico ancho (la primera foto ocupa el doble) + `items` opcionales
+// (zonas o servicios del centro con icono) en una fila de etiquetas.
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} contenedor="!max-w-[96rem]">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {s.items.length > 0 && (
+        <ul class="-mt-4 mb-8 flex flex-wrap gap-2.5">
+          {s.items.map((it) => (
+            <li class="etiqueta">
+              {it.icono && <Icono nombre={it.icono} tam={18} class="acento" />}
+              {it.titulo}
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.galeria.length > 0 && (
+        <ul class="mosaico">
+          {s.galeria.map((src, i) => (
+            <li class:list={['mosaico-celda', { 'mosaico-celda--grande': i === 0, 'mosaico-celda--ancha': i === 3 }]}>
+              <Imagen src={src} alt="" ancho={i === 0 ? 1600 : 800} alto={i === 0 ? 900 : 600} class="h-full w-full object-cover" />
+            </li>
+          ))}
+        </ul>
+      )}
+    </Seccion>
+  )
+}
+
+<style>
+  .mosaico { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 9rem; gap: .5rem; grid-auto-flow: dense; }
+  .mosaico-celda { overflow: hidden; min-width: 0; background: var(--superficie); }
+  .mosaico-celda--grande { grid-column: span 2; grid-row: span 2; }
+  @media (min-width: 768px) {
+    .mosaico { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 14rem; }
+    .mosaico-celda--ancha { grid-column: span 2; }
+  }
+  .mosaico-celda :global(img) { transition: transform .5s ease; }
+  .mosaico-celda:hover :global(img) { transform: scale(1.04); }
+</style>

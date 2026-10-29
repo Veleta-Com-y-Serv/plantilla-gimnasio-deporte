@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="seccion relative overflow-hidden">
+    <div class="franjas absolute top-10 right-0 w-1/2 max-w-md" aria-hidden="true"></div>
+    <div class="contenedor">
+      <p class="antetitulo">Error 404</p>
+      <p class="mt-2 font-display text-[clamp(7rem,40vw,16rem)] leading-[.8] font-extrabold tracking-tight text-acento [font-stretch:condensed]" aria-hidden="true">404</p>
+      <h1 class="titulo-seccion mt-6">Esta página no existe</h1>
+      <p class="mt-4 max-w-xl text-lg opacity-75">Puede que el enlace esté mal o que la página se haya movido.</p>
+      <p class="mt-9 pl-1.5"><a class="btn" href="/">Volver al inicio</a></p>
+    </div>
+  </section>
+</Base>

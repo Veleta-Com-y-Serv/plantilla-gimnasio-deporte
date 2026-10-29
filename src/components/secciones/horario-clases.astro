@@ -1,0 +1,64 @@
+---
+// Horario semanal: `clases_horario: [{dia, hora, clase, monitor}]` agrupado por `dia` en el orden de aparición.
+// En escritorio, una columna por día (tabla semanal); en móvil, lista por día. Sin clases: titular, texto y `cta`.
+import { seccion, porDia } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const dias = s ? porDia(s.clases_horario) : [];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="banda-primaria horario-seccion">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {dias.length > 0 && (
+        <div class="horario" style={`--dias:${Math.min(dias.length, 7)}`}>
+          {dias.map((d) => (
+            <section class="horario-dia" aria-label={d.dia}>
+              <h3 class="horario-titulo">{d.dia}</h3>
+              <ul>
+                {d.clases.map((c) => (
+                  <li class="horario-clase">
+                    {c.hora && <span class="horario-hora">{c.hora}</span>}
+                    <span class="min-w-0">
+                      <span class="horario-nombre">{c.clase}</span>
+                      {c.monitor && <span class="horario-monitor">{c.monitor}</span>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      )}
+      {s.nota && <p class="mt-6 text-sm opacity-75">{s.nota}</p>}
+      {s.cta && (
+        <p class="mt-10 pl-1.5">
+          <a class="btn" href={s.cta.url}>{s.cta.texto}</a>
+        </p>
+      )}
+    </Seccion>
+  )
+}
+
+<style>
+  .horario-seccion { position: relative; }
+  .horario-seccion::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: .6rem; background: var(--franjas); opacity: .9; }
+  .horario { display: grid; gap: 1.5rem; }
+  .horario-dia { min-width: 0; }
+  .horario-titulo { font-size: 1.6rem; padding-bottom: .5rem; border-bottom: 3px solid var(--c-acento); }
+  .horario-clase { display: grid; grid-template-columns: 4.25rem 1fr; gap: .75rem; padding-block: .7rem; border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
+  .horario-hora { justify-self: start; align-self: start; padding: .05rem .45rem; font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; font-size: 1.05rem; background: var(--c-acento); color: var(--sobre-acento); font-variant-numeric: tabular-nums; }
+  .horario-nombre { display: block; font-weight: 700; overflow-wrap: anywhere; }
+  .horario-monitor { display: block; font-size: .85rem; opacity: .7; }
+  @media (min-width: 640px) { .horario { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; } }
+  @media (min-width: 1024px) {
+    .horario { grid-template-columns: repeat(var(--dias), minmax(0, 1fr)); gap: 0; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
+    .horario-dia { border-right: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
+    .horario-dia:last-child { border-right: 0; }
+    .horario-titulo { font-size: 1.35rem; padding: .8rem .9rem; background: color-mix(in srgb, currentColor 6%, transparent); }
+    .horario-clase { grid-template-columns: 1fr; gap: .1rem; padding: .75rem .9rem; }
+  }
+</style>

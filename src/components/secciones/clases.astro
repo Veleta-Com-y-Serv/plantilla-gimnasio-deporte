@@ -1,0 +1,65 @@
+---
+// Clases: `items: [{titulo, texto, icono, imagen, intensidad ("Suave"|"Media"|"Alta")}]` en tarjetas con foto
+// y etiqueta de intensidad (con medidor de 3 rayas si es Suave/Media/Alta; si viene vacía, no se pinta).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const nivel = (v?: string) => ({ suave: 1, baja: 1, media: 2, alta: 3 } as Record<string, number>)[(v ?? '').trim().toLowerCase()] ?? 0;
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id}>
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {s.items.length > 0 && (
+        <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {s.items.map((it) => (
+            <li class="clase group">
+              {it.imagen && (
+                <div class="relative overflow-hidden">
+                  <Imagen src={it.imagen} alt="" ancho={800} alto={600} class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  {it.intensidad && (
+                    <p class="clase-intensidad">
+                      {nivel(it.intensidad) > 0 && (
+                        <span class="clase-medidor" aria-hidden="true">
+                          {[1, 2, 3].map((n) => <i class:list={{ lleno: n <= nivel(it.intensidad) }} />)}
+                        </span>
+                      )}
+                      {it.intensidad}
+                    </p>
+                  )}
+                </div>
+              )}
+              <div class="p-5 md:p-6">
+                <h3 class="flex items-center gap-2.5 text-[1.9rem]">
+                  {it.icono && <Icono nombre={it.icono} class="acento shrink-0" tam={26} />}
+                  {it.titulo}
+                </h3>
+                {!it.imagen && it.intensidad && <p class="etiqueta mt-3">{it.intensidad}</p>}
+                {it.texto && <p class="mt-3 opacity-75">{it.texto}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.cta && (
+        <p class="mt-12 pl-1.5">
+          <a class="btn" href={s.cta.url}>{s.cta.texto}</a>
+        </p>
+      )}
+    </Seccion>
+  )
+}
+
+<style>
+  .clase { background: var(--superficie); border-bottom: 3px solid transparent; transition: border-color .2s ease; }
+  .clase:hover { border-bottom-color: var(--c-acento); }
+  .clase-intensidad { position: absolute; left: 0; top: 1rem; display: inline-flex; align-items: center; gap: .55rem; padding: .35rem .8rem .35rem .9rem; background: var(--c-acento); color: var(--sobre-acento); font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem; clip-path: polygon(0 0, 100% 0, calc(100% - .6rem) 100%, 0 100%); padding-right: 1.3rem; }
+  .clase-medidor { display: inline-flex; gap: 2px; }
+  .clase-medidor i { width: 5px; height: 12px; background: color-mix(in srgb, currentColor 30%, transparent); transform: skewX(-15deg); }
+  .clase-medidor i.lleno { background: currentColor; }
+</style>

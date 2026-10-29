@@ -1,0 +1,35 @@
+---
+// Opiniones: `testimonios: [{texto, autor, nota}]` con barra inclinada de acento y texto grande.
+// `nota` opcional (p. ej. «Socia desde 2022»). Sin opiniones ni titular, la sección no se pinta.
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const hayAlgo = s && (s.testimonios.length > 0 || s.titulo || s.texto);
+---
+
+{
+  s && hayAlgo && (
+    <Seccion id={Astro.props.id}>
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {s.testimonios.length > 0 && (
+        <ul class="grid gap-10 md:grid-cols-3 md:gap-8">
+          {s.testimonios.map((t) => (
+            <li class="opinion">
+              <blockquote class="opinion-texto">{t.texto}</blockquote>
+              <p class="mt-5 font-display text-xl font-bold uppercase [font-stretch:condensed]">{t.autor}</p>
+              {t.nota && <p class="text-sm opacity-65">{t.nota}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
+    </Seccion>
+  )
+}
+
+<style>
+  .opinion { position: relative; padding-left: 1.5rem; }
+  .opinion::before { content: ""; position: absolute; left: .3rem; top: .2rem; bottom: .2rem; width: .4rem; background: var(--c-acento); transform: skewX(-10deg); }
+  .opinion-texto { font-size: 1.2rem; line-height: 1.5; font-weight: 500; }
+</style>

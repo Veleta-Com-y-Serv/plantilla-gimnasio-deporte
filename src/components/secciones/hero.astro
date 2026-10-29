@@ -1,0 +1,57 @@
+---
+// Hero a pantalla completa: foto con velo del color de fondo, titular enorme condensado en mayúsculas,
+// `texto`, `cta` y `cta_secundario`, `items` (3 etiquetas con icono) y franjas diagonales de acento.
+// Si es la primera sección, sube por debajo de la cabecera fija.
+import { seccion } from '../../data/site';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+---
+
+{
+  s && (
+    <section id={id} class:list={['hero-gym relative isolate overflow-hidden', { 'hero-gym--primera': primera }]}>
+      {s.imagen && (
+        <Imagen src={s.imagen} alt="" ancho={1920} alto={1080} prioridad={primera} class="absolute inset-0 -z-20 h-full w-full object-cover" />
+      )}
+      <div class="hero-velo absolute inset-0 -z-10" aria-hidden="true" />
+      <div class="hero-franja" aria-hidden="true" />
+      <div class="contenedor relative flex min-h-[inherit] flex-col justify-end pb-16 md:pb-24">
+        {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+        {s.titulo && <h1 class="hero-titulo">{s.titulo}</h1>}
+        {s.texto && <p class="mt-6 max-w-xl text-lg opacity-85 md:text-xl">{s.texto}</p>}
+        {(s.cta || s.cta_secundario) && (
+          <div class="mt-9 flex flex-wrap gap-4 pl-1.5">
+            {s.cta && <a class="btn" href={s.cta.url}>{s.cta.texto}</a>}
+            {s.cta_secundario && <a class="btn-sec" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+          </div>
+        )}
+        {s.items.length > 0 && (
+          <ul class="mt-10 flex flex-wrap gap-2.5">
+            {s.items.map((it) => (
+              <li class="etiqueta">
+                {it.icono && <Icono nombre={it.icono} tam={18} class="acento" />}
+                {it.titulo}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .hero-gym { min-height: calc(100svh - var(--alto-cabecera)); display: flex; flex-direction: column; }
+  .hero-gym > .contenedor { flex: 1; padding-top: 4rem; }
+  .hero-gym--primera { margin-top: calc(-1 * var(--alto-cabecera)); min-height: 100svh; }
+  .hero-gym--primera > .contenedor { padding-top: calc(var(--alto-cabecera) + 4rem); }
+  .hero-velo { background:
+    linear-gradient(0deg, var(--c-fondo) 0%, color-mix(in srgb, var(--c-fondo) 70%, transparent) 38%, color-mix(in srgb, var(--c-fondo) 35%, transparent) 100%),
+    linear-gradient(90deg, color-mix(in srgb, var(--c-fondo) 75%, transparent), transparent 70%); }
+  .hero-titulo { margin-top: .75rem; max-width: 14ch; font-size: clamp(3.4rem, 17vw, 9.5rem); line-height: .86; letter-spacing: -0.035em; overflow-wrap: break-word; }
+  .hero-franja { position: absolute; right: -4rem; top: 18%; width: min(46vw, 34rem); height: 5.5rem; background: var(--franjas); transform: skewY(-12deg); opacity: .85; z-index: -1; }
+  @media (max-width: 639px) { .hero-franja { top: 12%; height: 3rem; right: -2rem; } }
+</style>

@@ -1,0 +1,143 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Una sola página: el menú apunta a anclas (#id-de-sección).
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas planas: nunca una lista dentro de un elemento de lista. Precios siempre entre comillas.
+nombre: Forja Training Club
+eslogan: Gimnasio y clases dirigidas en Ponferrada. Entrena fuerte, sin permanencia.
+sector: gimnasio
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = inicial + nombre en texto.
+colores:
+  primario: "#1c1d24"   # banda del horario
+  acento: "#c6ff1a"     # verde neón: botones, franjas, resaltados
+  fondo: "#0c0c0f"      # tema oscuro por defecto; con fondo claro el diseño también funciona
+  texto: "#f2f2f0"
+contacto:
+  telefono: "987 40 63 18"
+  email: hola@forjatraining.es
+  direccion: Calle Río Boeza 9, 24403 Ponferrada (León)
+  horario: "Lunes a viernes, de 6:00 a 23:00. Fines de semana, de 9:00 a 14:00."
+  whatsapp: "+34 655 32 08 71"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: ""
+  linkedin: ""
+menu:
+  - { texto: Clases, url: "/#clases" }
+  - { texto: Horario, url: "/#horario-clases" }
+  - { texto: Tarifas, url: "/#tarifas" }
+  - { texto: Equipo, url: "/#entrenadores" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Prueba gratis, url: "/#contacto" }
+seo:
+  titulo: Forja Training Club · Gimnasio y clases dirigidas en Ponferrada
+  descripcion: "Sala de fuerza, cross training, ciclo indoor, yoga, pilates y boxeo en Ponferrada. Abierto de 6:00 a 23:00, sin permanencia y con clase de prueba gratis."
+  tipo: ExerciseGym
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Gimnasio en Ponferrada
+    titulo: Entrena sin excusas
+    texto: "Sala de fuerza, clases dirigidas y entrenadores que te corrigen de verdad. Ven a probar una clase gratis."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Reserva tu clase gratis, url: "/#contacto" }
+    cta_secundario: { texto: Ver tarifas, url: "/#tarifas" }
+    items:
+      - { titulo: "Abierto de 6:00 a 23:00", icono: reloj }
+      - { titulo: Sin permanencia, icono: check }
+      - { titulo: Primera clase gratis, icono: regalo }
+
+  clases:
+    activa: true
+    antetitulo: Clases dirigidas
+    titulo: Elige cómo quieres sudar
+    texto: "Grupos pequeños y un entrenador en cada clase. Para empezar desde cero o para ir a por más."
+    items:
+      - { titulo: Fuerza, texto: "Técnica de los básicos: sentadilla, peso muerto y press.", icono: pesa, imagen: /fotos/clase-fuerza.jpg, intensidad: Alta }
+      - { titulo: Cross training, texto: "Circuitos cortos e intensos que cambian cada día.", icono: fuego, imagen: /fotos/clase-cross.jpg, intensidad: Alta }
+      - { titulo: Ciclo indoor, texto: "45 minutos de bici con música. Tú marcas la resistencia.", icono: bici, imagen: /fotos/clase-ciclo.jpg, intensidad: Media }
+      - { titulo: Boxeo, texto: "Golpeo, desplazamientos y mucho cardio. Sin contacto.", icono: guante, imagen: /fotos/clase-boxeo.jpg, intensidad: Media }
+      - { titulo: Pilates, texto: "Core, postura y espalda sana. Con esterilla y accesorios.", icono: pulso, imagen: /fotos/clase-pilates.jpg, intensidad: Suave }
+      - { titulo: Yoga, texto: "Movilidad, respiración y calma al acabar el día.", icono: loto, imagen: /fotos/clase-yoga.jpg, intensidad: Suave }
+
+  horario-clases:
+    activa: true
+    antetitulo: Horario
+    titulo: Tu semana en Forja
+    texto: "Reserva tu plaza en recepción o por WhatsApp."
+    nota: "La sala de fuerza está abierta todo el horario del centro."
+    clases_horario:
+      - { dia: Lunes, hora: "7:00", clase: Cross training, monitor: Dani }
+      - { dia: Lunes, hora: "18:30", clase: Ciclo indoor, monitor: Lucía }
+      - { dia: Lunes, hora: "20:00", clase: Fuerza, monitor: Dani }
+      - { dia: Martes, hora: "9:30", clase: Pilates, monitor: Marta }
+      - { dia: Martes, hora: "19:00", clase: Boxeo, monitor: Iván }
+      - { dia: Martes, hora: "20:30", clase: Yoga, monitor: Marta }
+      - { dia: Miércoles, hora: "7:00", clase: Cross training, monitor: Dani }
+      - { dia: Miércoles, hora: "18:30", clase: Ciclo indoor, monitor: Lucía }
+      - { dia: Miércoles, hora: "20:00", clase: Fuerza, monitor: Iván }
+      - { dia: Jueves, hora: "9:30", clase: Pilates, monitor: Marta }
+      - { dia: Jueves, hora: "19:00", clase: Boxeo, monitor: Iván }
+      - { dia: Jueves, hora: "20:30", clase: Yoga, monitor: Marta }
+      - { dia: Viernes, hora: "7:00", clase: Cross training, monitor: Dani }
+      - { dia: Viernes, hora: "18:00", clase: Ciclo indoor, monitor: Lucía }
+      - { dia: Sábado, hora: "10:00", clase: Cross training, monitor: Iván }
+      - { dia: Sábado, hora: "11:30", clase: Yoga, monitor: Marta }
+
+  tarifas:
+    activa: true
+    antetitulo: Tarifas
+    titulo: Sin permanencia. Sin letra pequeña.
+    texto: "Te das de alta en recepción en cinco minutos."
+    nota: "Precios con IVA incluido. Primera clase de prueba gratis."
+    cta: { texto: Pregúntanos, url: "/#contacto" }
+    planes:
+      - { nombre: Sala, precio: "32,90 €", periodo: al mes, incluye: "Sala de fuerza y cardio; Vestuarios y taquilla; Rutina inicial con entrenador", destacado: false, cta_texto: Empezar }
+      - { nombre: Total, precio: "44,90 €", periodo: al mes, incluye: "Sala de fuerza y cardio; Todas las clases dirigidas; Valoración física cada trimestre; Vestuarios y taquilla", destacado: true, cta_texto: Lo quiero }
+      - { nombre: Personal, precio: "190 €", periodo: 10 sesiones, incluye: "Entrenador para ti solo; Plan de entrenamiento a medida; Acceso a sala incluido", destacado: false, cta_texto: Informarme }
+
+  entrenadores:
+    activa: true
+    antetitulo: Equipo
+    titulo: Quién te entrena
+    texto: "Entrenadores titulados que están en sala, no en el móvil."
+    personas:
+      - { nombre: Dani Prieto, cargo: Fuerza y cross training, foto: /placeholders/persona.svg, texto: "Graduado en Ciencias del Deporte. Diez años en sala." }
+      - { nombre: Marta Celada, cargo: Pilates y yoga, foto: /placeholders/persona.svg, texto: "Especialista en espalda y embarazo." }
+      - { nombre: Iván Ramos, cargo: Boxeo y fuerza, foto: /placeholders/persona.svg, texto: "Exboxeador amateur. Te enseña desde el primer golpe." }
+      - { nombre: Lucía Arias, cargo: Ciclo indoor, foto: /placeholders/persona.svg, texto: "Las clases con mejor música del Bierzo." }
+
+  instalaciones:
+    activa: true
+    antetitulo: Instalaciones
+    titulo: 900 m² para entrenar
+    texto: "Material nuevo, aire renovado y vestuarios con taquilla."
+    items:
+      - { titulo: Sala de fuerza, icono: pesa }
+      - { titulo: Zona de cardio, icono: pulso }
+      - { titulo: Dos salas de clases, icono: usuarios }
+      - { titulo: Vestuarios con taquilla, icono: taquilla }
+    galeria:
+      - /fotos/sala-fuerza.jpg
+      - /fotos/sala-cardio.jpg
+      - /fotos/sala-clases.jpg
+      - /fotos/zona-funcional.jpg
+      - /fotos/vestuarios.jpg
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo dicen los socios
+    testimonios:
+      - { texto: "Llevo dos años y es el primer gimnasio en el que no me he desapuntado en febrero.", autor: Sara L., nota: Socia desde 2024 }
+      - { texto: "Los entrenadores te corrigen la técnica en cada serie. Se nota.", autor: Roberto M., nota: Plan Total }
+      - { texto: "Empecé con pilates por la espalda y ahora no me pierdo el boxeo de los martes.", autor: Carmen F., nota: Socia desde 2025 }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Ven a probar
+    texto: "Déjanos tus datos y te reservamos una clase gratis. O pásate por recepción."
+    boton_formulario: Quiero mi clase gratis

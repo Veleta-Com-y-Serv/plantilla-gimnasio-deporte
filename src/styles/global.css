@@ -1,0 +1,93 @@
+/* Gimnasio y deporte — estilo enérgico: tema oscuro por defecto (colores.fondo oscuro en site.yaml), verde neón de acento,
+   titulares condensados en mayúsculas con interletrado negativo, franjas diagonales y botones inclinados.
+   Todo sale de las cuatro variables de color: si el cliente pone fondo claro, el diseño se vuelve claro sin romperse. */
+@import "tailwindcss";
+@import "./comun.css";
+@config "../../tailwind.config.mjs";
+
+:root {
+  --fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fuente-titulos: "Bahnschrift", "Arial Narrow", "Helvetica Neue", "Roboto Condensed", "Liberation Sans Narrow", system-ui, sans-serif;
+  --radio: 0; --ritmo: 4.5rem; --ritmo-md: 7rem; --ancho: 78rem;
+  --alto-cabecera: 4.25rem;
+  /* Letra sobre acento y primario: negra si el color es claro, blanca si es oscuro. */
+  --sobre-acento: #0c0c0f;
+  --sobre-primario: var(--c-texto);
+  --superficie: color-mix(in srgb, var(--c-texto) 6%, var(--c-fondo));
+  --superficie-2: color-mix(in srgb, var(--c-texto) 11%, var(--c-fondo));
+  --linea: color-mix(in srgb, var(--c-texto) 14%, transparent);
+  --negro: color-mix(in srgb, var(--c-fondo) 70%, #000);
+  --franjas: repeating-linear-gradient(-55deg, var(--c-acento) 0 10px, transparent 10px 22px);
+}
+@supports (color: oklch(from red l c h)) {
+  :root {
+    --sobre-acento: oklch(from var(--c-acento) clamp(0, (0.7 - l) * 100, 1) 0 0);
+    --sobre-primario: oklch(from var(--c-primario) clamp(0, (0.7 - l) * 100, 1) 0 0);
+  }
+}
+
+@layer base {
+  body { font-family: var(--fuente-texto); font-size: 1.0625rem; line-height: 1.6; }
+  h1, h2, h3 { font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; line-height: .95; }
+  html { scroll-padding-top: calc(var(--alto-cabecera) + 1rem); }
+  main { padding-top: var(--alto-cabecera); }
+}
+
+@layer components {
+  /* Titulares */
+  .antetitulo { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--fuente-titulos); font-stretch: condensed; font-size: .95rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--c-acento); }
+  .antetitulo::before { content: ""; width: 2rem; height: .35rem; background: var(--c-acento); transform: skewX(-30deg); }
+  .titulo-seccion { font-size: clamp(2.5rem, 9vw, 5rem); margin-top: .6rem; }
+  .titular { max-width: 50rem; margin-bottom: 3rem; }
+  .titular--centro { margin-inline: auto; text-align: center; }
+  .titular--centro .antetitulo { justify-content: center; }
+  .titular-texto { margin-top: 1rem; font-size: 1.15rem; opacity: .75; }
+  .acento { color: var(--c-acento); }
+
+  /* Botones inclinados (el fondo va en ::before para que el foco no se recorte) */
+  .btn, .btn-sec { position: relative; isolation: isolate; font-family: var(--fuente-titulos); font-stretch: condensed; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; font-size: 1.05rem; padding-inline: 1.7rem; min-height: 3rem; background: none; }
+  .btn::before, .btn-sec::before { content: ""; position: absolute; inset: 0; z-index: -1; transform: skewX(-12deg); transition: background-color .15s ease, box-shadow .15s ease; }
+  .btn { color: var(--sobre-acento); }
+  .btn::before { background: var(--c-acento); }
+  .btn:hover::before { box-shadow: 0 0 28px color-mix(in srgb, var(--c-acento) 55%, transparent); }
+  .btn-sec { color: inherit; }
+  .btn-sec::before { border: 2px solid currentColor; }
+  .btn-sec:hover::before { background: color-mix(in srgb, currentColor 10%, transparent); }
+
+  /* Franjas diagonales de acento */
+  .franjas { height: .9rem; background: var(--franjas); }
+  .banda-superficie { background: var(--superficie); }
+  .banda-primaria { background: var(--c-primario); color: var(--sobre-primario); }
+  .banda-primaria .antetitulo { color: inherit; }
+  .etiqueta { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .7rem; font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem; border: 1px solid color-mix(in srgb, var(--c-acento) 60%, transparent); }
+
+  /* Cabecera fija oscura */
+  .cabecera--gym { position: fixed; top: 0; left: 0; right: 0; background: color-mix(in srgb, var(--c-fondo) 90%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--linea); }
+  .cabecera--gym .cabecera-fila { min-height: var(--alto-cabecera); }
+  .cabecera--gym .marca-inicial { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; flex-shrink: 0; background: var(--c-acento); color: var(--sobre-acento); font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 900; font-size: 1.4rem; clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%); }
+  .cabecera--gym .marca-nombre { font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; text-transform: uppercase; font-size: 1.4rem; letter-spacing: -0.01em; }
+  .cabecera--gym .cabecera-nav a { font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 1rem; opacity: .8; }
+  .cabecera--gym .cabecera-nav a:hover { opacity: 1; color: var(--c-acento); }
+  .cabecera--gym .cabecera-cta { min-height: 2.6rem; font-size: .95rem; margin-right: .3rem; }
+  .cabecera--gym .menu-movil summary { font-family: var(--fuente-titulos); font-stretch: condensed; text-transform: uppercase; letter-spacing: .08em; }
+  .cabecera--gym .menu-movil-panel { border-bottom: 2px solid var(--c-acento); }
+  .cabecera--gym .menu-movil-panel a { font-family: var(--fuente-titulos); font-stretch: condensed; text-transform: uppercase; font-weight: 700; font-size: 1.15rem; letter-spacing: .04em; }
+
+  /* Formulario */
+  .campo label { font-family: var(--fuente-titulos); font-stretch: condensed; text-transform: uppercase; letter-spacing: .08em; font-size: .9rem; font-weight: 700; }
+  .campo input, .campo textarea, .campo select { width: 100%; font: inherit; color: inherit; background: var(--superficie); padding: .75rem .9rem; border: 1px solid var(--linea); border-bottom: 2px solid color-mix(in srgb, var(--c-texto) 40%, transparent); border-radius: 0; }
+  .campo select option { background: var(--c-fondo); color: var(--c-texto); }
+  .campo input:focus, .campo textarea:focus, .campo select:focus { outline: none; border-bottom-color: var(--c-acento); box-shadow: 0 2px 0 var(--c-acento); }
+  .campo-doble { display: grid; gap: 1rem; }
+  @media (min-width: 640px) { .campo-doble { grid-template-columns: 1fr 1fr; } }
+  .formulario .btn { margin-left: .4rem; }
+
+  /* Pie negro */
+  .pie--gym { background: var(--negro); padding-top: 0; }
+  .pie--gym .pie-cuerpo { padding-top: 3.5rem; }
+  .pie--gym .pie-nombre { font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; text-transform: uppercase; font-size: 1.75rem; }
+  .pie--gym .pie-titulo { color: var(--c-acento); opacity: 1; font-family: var(--fuente-titulos); font-stretch: condensed; font-size: .95rem; font-weight: 700; }
+  .pie-horario { font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; text-transform: uppercase; font-size: clamp(2rem, 7.5vw, 4.25rem); line-height: .95; letter-spacing: -0.02em; max-width: 22ch; overflow-wrap: break-word; }
+
+  .texto-largo h2 { font-size: 1.6rem; }
+}
