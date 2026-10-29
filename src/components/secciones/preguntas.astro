@@ -1,0 +1,44 @@
+---
+// Preguntas frecuentes: acordeón nativo <details> sobre banda gris, pregunta en la letra condensada de los
+// títulos y signo en un rombo de acento, sin JavaScript. Campos: `preguntas[]` (pregunta, respuesta).
+// Sin preguntas no se pinta. También sirve de diseño para apartados nuevos (`tipo: preguntas`).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const preguntas = s ? s.preguntas.filter((p) => p && p.pregunta) : [];
+---
+
+{
+  s && preguntas.length > 0 && (
+    <Seccion id={Astro.props.id} class="banda-superficie">
+      <div class="grid gap-10 lg:grid-cols-12">
+        <Titular class="lg:col-span-5" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <div class="faq-lista lg:col-span-7">
+          {preguntas.map((p) => (
+            <details class="faq">
+              <summary>
+                <span class="faq-pregunta">{p.pregunta}</span>
+                <span class="faq-signo" aria-hidden="true"><span>+</span></span>
+              </summary>
+              {p.respuesta && <p class="faq-respuesta">{p.respuesta}</p>}
+            </details>
+          ))}
+        </div>
+      </div>
+    </Seccion>
+  )
+}
+
+<style>
+  .faq-lista { border-top: 2px solid var(--linea); }
+  .faq { border-bottom: 2px solid var(--linea); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding-block: 1.25rem; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq-pregunta { font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; text-transform: uppercase; font-size: 1.35rem; line-height: 1.05; letter-spacing: -0.01em; }
+  .faq-signo { flex-shrink: 0; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; background: var(--c-acento); color: var(--sobre-acento); transform: skewX(-12deg); font-weight: 800; font-size: 1.5rem; line-height: 1; }
+  .faq-signo span { display: block; transition: transform 0.2s ease; transform: skewX(12deg); }
+  .faq[open] .faq-signo span { transform: skewX(12deg) rotate(45deg); }
+  .faq-respuesta { padding-bottom: 1.4rem; padding-right: 3rem; opacity: 0.78; }
+</style>

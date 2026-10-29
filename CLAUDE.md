@@ -24,6 +24,7 @@ Cada sección es un componente que solo se pinta si `site.yaml → secciones.<id
 - `entrenadores` → `entrenadores.astro`: `personas: [{nombre, cargo, foto, texto}]`.
 - `instalaciones` → `instalaciones.astro`: `galeria: [ruta…]` en mosaico (la 1.ª grande, la 4.ª ancha) + `items: [{titulo, icono}]` opcionales.
 - `opiniones` → `opiniones.astro`: `testimonios: [{texto, autor, nota}]`. No inventes opiniones.
+- `preguntas` → `preguntas.astro` (preguntas frecuentes en acordeón `details/summary`; sin preguntas no se pinta)
 - `contacto` → `contacto.astro`: teléfono en grande y datos de `contacto`; formulario (nombre, teléfono, email, «Me interesa» con las clases y los planes, mensaje). `boton_formulario` opcional.
 - `texto` → `texto.astro`: apartado genérico (párrafos, `imagen`, `items`, `cta`). Para apartados nuevos: `tipo: texto`.
 
@@ -34,8 +35,8 @@ Cada sección es un componente que solo se pinta si `site.yaml → secciones.<id
 4. **Listas planas**: nunca una lista dentro de un elemento de lista (el horario es una lista de clases con su `dia`, no días con clases dentro). Precios siempre como texto entre comillas. Máximo 24 elementos por lista.
 5. **Página nueva**: crea `src/pages/<slug>.astro` usando `import Base from '../layouts/Base.astro'` y `<Base titulo="…" descripcion="…">…</Base>`; enlázala en `site.yaml → menu` (`{ texto: …, url: "/<slug>" }`). Ejemplo: `src/pages/aviso-legal.astro`.
 6. **Sección nueva**: mejor un apartado con `tipo:` (`tipo: texto`, `tipo: clases`, `tipo: tarifas`…) y su propio id. Si hace falta un diseño nuevo, crea `src/components/secciones/<id>.astro` con `seccion(Astro.props.id)`, `Seccion`, `Titular`. `src/pages/index.astro` la recoge sola: no lo toques.
-7. **No tocar** `src/layouts/Base.astro`, `src/pages/index.astro`, `tailwind.config.mjs` ni `src/styles/comun.css` salvo orden explícita de diseño. Los ids `hero` y `contacto` son obligatorios.
-8. Mantén: `lang="es-ES"`, imágenes con `Imagen.astro` (carga diferida), sin JavaScript nuevo salvo necesidad real, 16 px de margen lateral (`.contenedor`), sin scroll horizontal en móvil.
+7. **No tocar** `src/layouts/Base.astro`, `src/pages/index.astro`, `tailwind.config.mjs` ni `src/styles/comun.css` salvo orden explícita de diseño. Los ids `hero` y `contacto` son obligatorios. Tampoco `src/lib/seo.ts` ni `src/pages/robots.txt.ts`, `sitemap.xml.ts` y `llms.txt.ts`: son el SEO de base (canónica, og:image, `noindex` si `seo.indexable: false`, JSON-LD del negocio y de las preguntas, robots, sitemap y llms.txt), salen solos de `site.yaml` y el fichero es el mismo en las 16 plantillas. `seo.url` y `seo.indexable` los pone la plataforma: no los cambies.
+8. Mantén: `lang="es-ES"`, imágenes con `Imagen.astro` (carga diferida), sin JavaScript nuevo salvo necesidad real, 16 px de margen lateral (`.contenedor`), sin scroll horizontal en móvil. Imágenes de contenido con `alt` sacado del contenido (`altHero`, `altFicha`, `altGaleria`, `altSeccion` de `src/lib/seo.ts`, o el `titulo`/`nombre` de la ficha); las decorativas, `alt=""` (Imagen.astro les pone `aria-hidden`).
 9. El formulario no tiene servidor: abre el correo (`mailto`) con el email de `site.yaml`. Para envío real, cambia `action` en `src/components/ui/FormularioContacto.astro`.
 10. Iconos disponibles: ver `src/components/ui/Icono.astro` (de deporte: `pesa, fuego, bici, guante, loto, pulso, cronometro, taquilla, trofeo, corazon, reloj, regalo`…).
 

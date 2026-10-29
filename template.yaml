@@ -11,10 +11,11 @@ secciones:
   - { id: entrenadores, nombre: Entrenadores }
   - { id: instalaciones, nombre: Instalaciones }
   - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
   - { id: contacto, nombre: Contacto }
 estilo: energico
 plan_minimo: presencia
-version: 1.1.0
+version: 1.2.0
 base: astrowind
 demo_url: https://demo-plantilla-gimnasio-deporte.noexpertise.com
 activa: true
@@ -64,6 +65,12 @@ asistente:
     pregunta: "¿Cómo son vuestras instalaciones? Salas, vestuarios, aparcamiento…"
     tipo: texto
     campos: [secciones.instalaciones.titulo, secciones.instalaciones.texto, secciones.instalaciones.items]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan más a menudo? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
   - id: fotos
     titulo: "Tus fotos"
     pregunta: "Pon una foto de portada y, si quieres, alguna más."

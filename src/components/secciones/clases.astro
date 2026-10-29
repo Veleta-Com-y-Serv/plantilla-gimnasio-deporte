@@ -2,6 +2,7 @@
 // Clases: `items: [{titulo, texto, icono, imagen, intensidad ("Suave"|"Media"|"Alta")}]` en tarjetas con foto
 // y etiqueta de intensidad (con medidor de 3 rayas si es Suave/Media/Alta; si viene vacía, no se pinta).
 import { seccion } from '../../data/site';
+import { altFicha } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -21,7 +22,7 @@ const nivel = (v?: string) => ({ suave: 1, baja: 1, media: 2, alta: 3 } as Recor
             <li class="clase group">
               {it.imagen && (
                 <div class="relative overflow-hidden">
-                  <Imagen src={it.imagen} alt="" ancho={800} alto={600} class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <Imagen src={it.imagen} alt={altFicha(it)} ancho={800} alto={600} class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   {it.intensidad && (
                     <p class="clase-intensidad">
                       {nivel(it.intensidad) > 0 && (

@@ -135,6 +135,17 @@ secciones:
       - { texto: "Los entrenadores te corrigen la técnica en cada serie. Se nota.", autor: Roberto M., nota: Plan Total }
       - { texto: "Empecé con pilates por la espalda y ahora no me pierdo el boxeo de los martes.", autor: Carmen F., nota: Socia desde 2025 }
 
+  preguntas:
+    activa: true
+    antetitulo: Preguntas
+    titulo: Dudas antes de empezar
+    preguntas:
+      - { pregunta: "¿Puedo probar antes de apuntarme?", respuesta: "Sí. La primera clase es gratis: reserva por WhatsApp o en recepción y ven con ropa cómoda." }
+      - { pregunta: "¿Hay permanencia o matrícula?", respuesta: "No hay permanencia. Te das de alta en recepción en cinco minutos y te das de baja cuando quieras, avisando antes de fin de mes." }
+      - { pregunta: "¿Nunca he entrenado, es para mí?", respuesta: "Sí. Te hacemos una rutina inicial con un entrenador y en las clases te proponemos versiones más suaves de cada ejercicio." }
+      - { pregunta: "¿Hay que reservar las clases dirigidas?", respuesta: "Sí, para guardar plaza. Las plazas son limitadas en ciclo indoor y boxeo." }
+      - { pregunta: "¿Tenéis vestuarios y taquillas?", respuesta: "Sí, con duchas y taquilla incluidos en todas las tarifas. Trae tu candado." }
+
   contacto:
     activa: true
     antetitulo: Contacto
