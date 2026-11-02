@@ -55,10 +55,54 @@ secciones:
     titulo: Elige cómo quieres sudar
     texto: "Grupos pequeños y un entrenador en cada clase. Para empezar desde cero o para ir a por más."
     items:
-      - { titulo: Fuerza, texto: "Técnica de los básicos: sentadilla, peso muerto y press.", icono: pesa, imagen: /fotos/clase-fuerza.jpg, intensidad: Alta }
-      - { titulo: Cross training, texto: "Circuitos cortos e intensos que cambian cada día.", icono: fuego, imagen: /fotos/clase-cross.jpg, intensidad: Alta }
-      - { titulo: Ciclo indoor, texto: "45 minutos de bici con música. Tú marcas la resistencia.", icono: bici, imagen: /fotos/clase-ciclo.jpg, intensidad: Media }
-      - { titulo: Boxeo, texto: "Golpeo, desplazamientos y mucho cardio. Sin contacto.", icono: guante, imagen: /fotos/clase-boxeo.jpg, intensidad: Media }
+      - titulo: Fuerza
+        texto: "Técnica de los básicos: sentadilla, peso muerto y press."
+        icono: pesa
+        imagen: /fotos/clase-fuerza.jpg
+        imagenes: "/fotos/sala-fuerza.jpg; /fotos/zona-funcional.jpg"
+        intensidad: Alta
+        detalle: |
+          La clase de fuerza es la mejor manera de aprender a mover peso con cabeza. Trabajamos los grandes básicos, sentadilla, peso muerto y press, con la técnica por delante de la carga y un entrenador que te corrige en cada serie.
+
+          Cada sesión empieza con una activación de movilidad para llegar a la barra con las articulaciones preparadas. Después se plantea un bloque principal con progresión semanal y un bloque de apoyo para zonas flojas: espalda alta, glúteo, core. Se adapta a cada persona, así que quien empieza usa una barra ligera y quien lleva años de hierro tiene su propia carga.
+
+          Es una clase para quien quiere ganar fuerza, mejorar la postura o perder miedo a la sala de pesas. Los grupos son pequeños para que nadie se quede sin atención. Trae ropa cómoda, calzado plano y una toalla; el material lo ponemos nosotros. Al terminar sabrás qué has hecho, por qué y cómo repetirlo por tu cuenta en la sala.
+      - titulo: Cross training
+        texto: "Circuitos cortos e intensos que cambian cada día."
+        icono: fuego
+        imagen: /fotos/clase-cross.jpg
+        imagenes: "/fotos/zona-funcional.jpg; /fotos/sala-clases.jpg"
+        intensidad: Alta
+        detalle: |
+          El cross training combina levantamientos, gimnásticos y cardio en circuitos que cambian cada día. No hay dos sesiones iguales, y eso hace que el cuerpo no se acostumbre y que la cabeza tampoco se aburra.
+
+          La clase arranca con un calentamiento dirigido y una explicación de los movimientos del día. A continuación se trabaja una parte de técnica o fuerza y se cierra con un circuito corto e intenso, de esos que se acaban con la lengua fuera pero con ganas de volver. Todo tiene versión para principiantes y versión para quien quiere ir a por más, de modo que en el mismo grupo cada uno entrena a su nivel.
+
+          Es ideal si buscas ponerte en forma rápido, mejorar la resistencia o entrenar en compañía, porque el ambiente de grupo empuja. Recomendamos venir con calzado estable, ropa que permita moverse y una botella de agua. Si es tu primera vez, avisa en recepción y el entrenador te guiará en los movimientos.
+      - titulo: Ciclo indoor
+        texto: "45 minutos de bici con música. Tú marcas la resistencia."
+        icono: bici
+        imagen: /fotos/clase-ciclo.jpg
+        imagenes: "/fotos/sala-clases.jpg; /fotos/sala-cardio.jpg"
+        intensidad: Media
+        detalle: |
+          El ciclo indoor es una sesión de bici en grupo, con música y un monitor que marca el ritmo. Son 45 minutos de cardio pensados para que sudes mucho, te lo pases bien y cuides las rodillas, porque tú decides la resistencia en cada momento.
+
+          Antes de empezar te ayudamos a ajustar el sillín y el manillar, un detalle que marca la diferencia en la comodidad. La clase alterna llanos, subidas, series rápidas y tramos de recuperación, siempre siguiendo la música. Nadie compite con nadie: cada bici tiene su propio ritmo y el monitor da referencias para que los que empiezan y los que ya llevan tiempo trabajen a su medida.
+
+          Es una buena elección si quieres mejorar la condición física sin impacto, quemar energía después del trabajo o complementar el trabajo de fuerza. Trae una toalla y agua, y calzado cómodo; si tienes zapatillas con calas puedes usarlas, y si no, las normales valen perfectamente.
+      - titulo: Boxeo
+        texto: "Golpeo, desplazamientos y mucho cardio. Sin contacto."
+        icono: guante
+        imagen: /fotos/clase-boxeo.jpg
+        imagenes: "/fotos/sala-clases.jpg; /fotos/vestuarios.jpg"
+        intensidad: Media
+        detalle: |
+          La clase de boxeo te enseña a golpear, moverte y respirar como en un gimnasio de boxeo, pero sin recibir un solo golpe. Es un entrenamiento de cardio completo en el que se trabaja el cuerpo entero, con mucho tren superior, piernas ágiles y un core que acaba agradeciéndolo.
+
+          Empezamos con cuerda y movilidad, seguimos con los fundamentos de la guardia, los desplazamientos y las combinaciones básicas, y pasamos a trabajar sobre saco y manoplas por rondas. El entrenador corrige la postura de muñecas, hombros y cadera para que pegues fuerte sin hacerte daño. Quienes llegan por primera vez aprenden lo esencial en la propia sesión.
+
+          Es una clase estupenda para soltar tensiones, ganar coordinación y mejorar la forma física con un entrenamiento distinto. No hace falta experiencia previa. Lleva ropa cómoda, calzado deportivo, una toalla y agua; las vendas y el material de golpeo están disponibles en el centro.
       - { titulo: Pilates, texto: "Core, postura y espalda sana. Con esterilla y accesorios.", icono: pulso, imagen: /fotos/clase-pilates.jpg, intensidad: Suave }
       - { titulo: Yoga, texto: "Movilidad, respiración y calma al acabar el día.", icono: loto, imagen: /fotos/clase-yoga.jpg, intensidad: Suave }
 

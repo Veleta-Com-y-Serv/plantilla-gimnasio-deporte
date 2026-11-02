@@ -1,8 +1,10 @@
 ---
 // Clases: `items: [{titulo, texto, icono, imagen, intensidad ("Suave"|"Media"|"Alta")}]` en tarjetas con foto
 // y etiqueta de intensidad (con medidor de 3 rayas si es Suave/Media/Alta; si viene vacía, no se pinta).
+// Las clases con `detalle` tienen página propia (/clases/<slug>/) y la tarjeta entera enlaza a ella.
 import { seccion } from '../../data/site';
 import { altFicha } from '../../lib/seo';
+import { enlaceDe } from '../../lib/paginas';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -38,8 +40,9 @@ const nivel = (v?: string) => ({ suave: 1, baja: 1, media: 2, alta: 3 } as Recor
               <div class="p-5 md:p-6">
                 <h3 class="flex items-center gap-2.5 text-[1.9rem]">
                   {it.icono && <Icono nombre={it.icono} class="acento shrink-0" tam={26} />}
-                  {it.titulo}
+                  {enlaceDe(it) ? <a href={enlaceDe(it)} class="clase-enlace">{it.titulo}</a> : it.titulo}
                 </h3>
+                {enlaceDe(it) && <span class="clase-ver" aria-hidden="true">Ver más <Icono nombre="flecha" tam={16} /></span>}
                 {!it.imagen && it.intensidad && <p class="etiqueta mt-3">{it.intensidad}</p>}
                 {it.texto && <p class="mt-3 opacity-75">{it.texto}</p>}
               </div>
@@ -57,7 +60,12 @@ const nivel = (v?: string) => ({ suave: 1, baja: 1, media: 2, alta: 3 } as Recor
 }
 
 <style>
-  .clase { background: var(--superficie); border-bottom: 3px solid transparent; transition: border-color .2s ease; }
+  .clase-enlace { color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+  .clase-enlace::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+  .clase-enlace:focus-visible { outline: none; }
+  .clase:has(.clase-enlace:focus-visible) { outline: 2px solid var(--c-acento); outline-offset: 2px; }
+  .clase-ver { display: inline-flex; align-items: center; gap: .3rem; margin-top: .75rem; font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--c-acento); }
+  .clase { position: relative; background: var(--superficie); border-bottom: 3px solid transparent; transition: border-color .2s ease; }
   .clase:hover { border-bottom-color: var(--c-acento); }
   .clase-intensidad { position: absolute; left: 0; top: 1rem; display: inline-flex; align-items: center; gap: .55rem; padding: .35rem .8rem .35rem .9rem; background: var(--c-acento); color: var(--sobre-acento); font-family: var(--fuente-titulos); font-stretch: condensed; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem; clip-path: polygon(0 0, 100% 0, calc(100% - .6rem) 100%, 0 100%); padding-right: 1.3rem; }
   .clase-medidor { display: inline-flex; gap: 2px; }
