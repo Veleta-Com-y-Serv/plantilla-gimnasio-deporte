@@ -6,10 +6,11 @@ import { seccion, puntos } from '../../data/site';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Icono from '../ui/Icono.astro';
+import { enlace } from '../../lib/multipagina';
 interface Props { id: string }
 const s = seccion(Astro.props.id);
 const planes = s?.planes ?? [];
-const destino = s?.cta?.url || '/#contacto';
+const destino = s?.cta?.url || enlace('/#contacto');
 const columnas = Math.min(Math.max(planes.length, 1), 3);
 ---
 
